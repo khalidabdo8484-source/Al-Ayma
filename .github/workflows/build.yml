@@ -16,12 +16,12 @@ jobs:
         with:
           flutter-version: '3.22.3'
           channel: 'stable'
-          cache: true
-      - name: Build
+      - name: Fix & Build
         run: |
-          flutter create . --project-name toktok_game --org com.toktok.game --platforms=android --no-pub
+          rm -rf android ios web windows macos linux
+          flutter create . --project-name toktok_game --org com.toktok.game --platforms=android
           flutter pub get
-          flutter build apk --release --no-tree-shake-icons
+          flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
           name: toktok-apk
